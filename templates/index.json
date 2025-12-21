@@ -6,9 +6,16 @@
         "settings": {
 
         }
+    },
+    "collection":{
+        "type": "collection",
+        "settings": {
+
+        }
     }
   },
   "order": [
-    "hero"
+    "hero",
+    "collection"
   ]
 }
