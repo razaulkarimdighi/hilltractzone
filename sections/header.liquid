@@ -3,37 +3,40 @@
   <nav class="container mx-auto h-[60px] flex justify-between items-center">
     <!-- Menu -->
     <ul class="hidden xl:flex xl:justify-center xl:items-center xl:gap-6">
+
+    {% if section.settings.link_list.links != blank %}
+      {% for nav in section.settings.link_list.links %}
       <li class="hidden xl:block xl:text-xs xl:font-medium xl:uppercase">
-        <a href="/collection">New in</a>
+        <a href="{{ nav.url  }}">{{ nav.title }}</a>
       </li>
+      {% endfor %}
+      {% else %}
       <li class="hidden xl:block xl:text-xs xl:font-medium xl:uppercase">
-        <a href="/collection">Woman</a>
+        <a href="#">New In</a>
       </li>
-      <li class="hidden xl:block xl:text-xs xl:font-medium xl:uppercase">
-        <a href="/collection">Men</a>
-      </li>
-      <li class="hidden xl:block xl:text-xs xl:font-medium xl:uppercase">
-        <a href="/collection">Trainers</a>
-      </li>
-      <li class="hidden xl:block xl:text-xs xl:font-medium xl:uppercase">
-        <a href="/collection">Kids</a>
-      </li>
-      <li class="hidden xl:block xl:text-xs xl:font-medium xl:uppercase">
-        <a href="/collection">Accessories</a>
-      </li>
-      <li class="hidden xl:block xl:text-xs xl:font-medium xl:uppercase">
-        <a href="/collection">Brands</a>
-      </li>
-      <li class="hidden xl:block xl:text-xs xl:font-medium xl:uppercase">
-        <a href="/collection">Sale</a>
-      </li>
+    {% endif %}
+
+
     </ul>
     <!-- End Menu -->
     <!-- Logo -->
     <div class="block">
-      <a class="block w-28 sm:w-36 lg:w-44 xl:w-52" href="/">
+       <a class="block w-28 sm:w-36 lg:w-44 xl:w-52" href="/">
+        {% if section.settings.logo != blank %}
+        {% comment %} <img class="block w-28 sm:w-36 lg:w-44 xl:w-52"
+        height="200"
+        width="200"
+        src="{{ section.settings.logo |  image_url: width:200  }}"
+        alt="Logo"
+        > {% endcomment %}
+
+        {{ section.settings.logo |  image_url: width:200 |  image_tag  }}
+     
+      
+        {% else %}
         {{ shop.name }}
-      </a>
+      {% endif %}
+       </a>
     </div>
     <!-- End Logo -->
     <!-- Search and Icons -->
@@ -223,3 +226,23 @@
   <!-------------------------- SubMenuComponent --------------------------->
 </header>
 <!-- End Header -->
+
+{% schema %}
+{
+  "name": "header",
+  "class": "header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "link_list",
+      "label": "Menu"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo",
+      "info": "This is the logo for header"
+    }
+    ]
+}
+{% endschema %}
