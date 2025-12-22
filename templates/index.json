@@ -1,0 +1,14 @@
+{
+  "wrapper": "main.home-main#home",
+  "sections": {
+    "hero":{
+      "type": "hero",
+      "settings": {}
+    },
+    "collection":{
+      "type": "collection",
+      "settings": {}
+    }
+  },
+  "order": ["hero","collection"]
+}
