@@ -2,41 +2,52 @@
   <nav class="container mx-auto h-[60px] flex justify-between items-center">
     <!-- Menu -->
     <ul class="hidden xl:flex xl:justify-center xl:items-center xl:gap-6">
-      <li class="hidden xl:block xl:text-xs xl:font-medium xl:uppercase">
-        <a href="/collection">New in</a>
-      </li>
-      <li class="hidden xl:block xl:text-xs xl:font-medium xl:uppercase">
-        <a href="/collection">Woman</a>
-      </li>
-      <li class="hidden xl:block xl:text-xs xl:font-medium xl:uppercase">
-        <a href="/collection">Men</a>
-      </li>
-      <li class="hidden xl:block xl:text-xs xl:font-medium xl:uppercase">
-        <a href="/collection">Trainers</a>
-      </li>
-      <li class="hidden xl:block xl:text-xs xl:font-medium xl:uppercase">
-        <a href="/collection">Kids</a>
-      </li>
-      <li class="hidden xl:block xl:text-xs xl:font-medium xl:uppercase">
-        <a href="/collection">Accessories</a>
-      </li>
-      <li class="hidden xl:block xl:text-xs xl:font-medium xl:uppercase">
-        <a href="/collection">Brands</a>
-      </li>
-      <li class="hidden xl:block xl:text-xs xl:font-medium xl:uppercase">
-        <a href="/collection">Sale</a>
-      </li>
+
+
+      {% if section.settings.menu_list.links != blank %}
+        {% for nav in section.settings.menu_list.links %}
+          <a href="{{ nav.url }}">{{ nav.title }}</a>
+        {% endfor %}
+      {% else %}
+        <a href="#">New In</a>
+      {% endif %}
+
+
+    {% comment %} <li class="hidden xl:block xl:text-xs xl:font-medium xl:uppercase">
+              <a href="/collection">New in</a>
+            </li>
+            <li class="hidden xl:block xl:text-xs xl:font-medium xl:uppercase">
+              <a href="/collection">Woman</a>
+            </li>
+            <li class="hidden xl:block xl:text-xs xl:font-medium xl:uppercase">
+              <a href="/collection">Men</a>
+            </li>
+            <li class="hidden xl:block xl:text-xs xl:font-medium xl:uppercase">
+              <a href="/collection">Trainers</a>
+            </li>
+            <li class="hidden xl:block xl:text-xs xl:font-medium xl:uppercase">
+              <a href="/collection">Kids</a>
+            </li>
+            <li class="hidden xl:block xl:text-xs xl:font-medium xl:uppercase">
+              <a href="/collection">Accessories</a>
+            </li>
+            <li class="hidden xl:block xl:text-xs xl:font-medium xl:uppercase">
+              <a href="/collection">Brands</a>
+            </li>
+            <li class="hidden xl:block xl:text-xs xl:font-medium xl:uppercase">
+              <a href="/collection">Sale</a>
+          </li> {% endcomment %}
     </ul>
     <!-- End Menu -->
     <!-- Logo -->
     <div class="block">
       <a class="block w-28 sm:w-36 lg:w-44 xl:w-52" href="/">
-        {{ shop.name }}
-      {% comment %} <img
-                  class="block w-full h-full object-center object-cover"
-                  src="../../src/images/logo.png"
-                  alt="Logo Image"
-              /> {% endcomment %}
+        {% if section.settings.logo != blank %}
+          {{ section.settings.logo |  image_url: width: 200 |  image_tag }}
+        {% else %}
+          {{ shop.name }}
+        {% endif %}
+
       </a>
     </div>
     <!-- End Logo -->
@@ -81,6 +92,7 @@
               </h6>
               <p class="xl:text-sm xl:text-center">
                 Login if you are an existing Angeldren customer or register to
+ 
  
                 make ordering simple
               </p>
@@ -166,17 +178,17 @@
     <!-- Body menu -->
     <ul class="mobileMenuUl block px-4 h-[calc(100vh-18.625rem)] overflow-y-scroll">
       <!-- <li
-      class="flex justify-between items-center h-[4.375rem] border-b border-gray-200"
-        >
-          <span class="text-base block font-medium uppercase">New in</span>
-          <span class="block">
-            <img
-              class="w-11 h-11"
-              src="./src/svgs/chevron-right.svg"
-              alt="Chevron right icon"
-            />
-          </span>
-        </li> -->
+class="flex justify-between items-center h-[4.375rem] border-b border-gray-200"
+      >
+        <span class="text-base block font-medium uppercase">New in</span>
+        <span class="block">
+          <img
+            class="w-11 h-11"
+            src="./src/svgs/chevron-right.svg"
+            alt="Chevron right icon"
+          />
+        </span>
+      </li> -->
     </ul>
     <!-- End Body menu -->
     <!-- Foot -->
@@ -212,6 +224,11 @@
         "type": "link_list",
         "id": "menu_list",
         "label": "Menu"
+      }, {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo",
+        "info": "This is a logo for the header"
       }
     ]
   }

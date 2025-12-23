@@ -1,19 +1,49 @@
 <!-- Announcement bar -->
-<section class="bg-pink-200 w-full px-4">
-  <div
-    class="container flex justify-center items-center h-10 lg:justify-between"
-  >
-    <a href="#" class="announcement block font-medium text-sm"
-      >10% Student Discount</a
-    >
-    <a href="#" class="announcement hidden font-medium text-sm lg:block"
-      >Shop New in</a
-    >
-    <a href="#" class="announcement hidden font-medium text-sm lg:block"
-      >Free Delivery over $100</a
-    >
-    <a href="#" class="announcement hidden font-medium text-sm lg:block"
-      >Store locator</a
-    >
+<section style="background-color: {{ section.settings.announcement_bg_color }}; color: {{ section.settings.announcement_text_color }}" class="w-full px-4">
+  <div class="container flex justify-center items-center h-10 lg:justify-between">
+    <a href="#" class="announcement block font-medium text-sm">10% Student Discount</a>
+    <a href="#" class="announcement hidden font-medium text-sm lg:block">Shop New in</a>
+    <a href="#" class="announcement hidden font-medium text-sm lg:block">Free Delivery over $100</a>
+    <a href="#" class="announcement hidden font-medium text-sm lg:block">Store locator</a>
   </div>
 </section>
+{% schema %}
+  {
+    "name": "Announcement",
+    "class": "announcement",
+    "limit": 1,
+    "settings": [
+      {
+        "type": "header",
+        "content": "Color Settings"
+      }, {
+        "type": "color",
+        "id": "announcement_bg_color",
+        "label": "Background Color",
+        "default": "#000000"
+      }, {
+        "type": "color",
+        "id": "announcement_text_color",
+        "label": "Text Color",
+        "default": "#ffffff"
+      }
+    ],
+    "blocks": [
+        {
+            "name": "Announcement-block",
+            "type": "announcement",
+            "limit": 4,
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "announcement_text",
+                    "label": "Announcement"
+
+                }
+            ]
+
+
+        }
+    ]
+  }
+{% endschema %}
