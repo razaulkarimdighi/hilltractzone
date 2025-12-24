@@ -1,10 +1,17 @@
 <!-- Announcement bar -->
 <section style="background-color: {{ section.settings.announcement_bg_color }}; color: {{ section.settings.announcement_text_color }};" class="w-full px-4">
   <div class="container flex justify-center items-center h-10 lg:justify-between">
-    <a href="#" class="announcement block font-medium text-sm">10% Student Discount</a>
-    <a href="#" class="announcement hidden font-medium text-sm lg:block">Shop New in</a>
-    <a href="#" class="announcement hidden font-medium text-sm lg:block">Free Delivery over $100</a>
-    <a href="#" class="announcement hidden font-medium text-sm lg:block">Store locator</a>
+    {% if section.blocks.size != 0 %}
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when "announcement-block" %}
+            <a href="#" class="announcement block font-medium text-sm">{{ block.settings.announcement_text }}</a>
+          {% else %}
+            
+        {% endcase %}
+      {% endfor %}
+    {% endif %}
+   
   </div>
 </section>
 {% schema %}
@@ -31,7 +38,7 @@
     "blocks": [
         {
             "name": "Announcement-block",
-            "type": "announcement",
+            "type": "announcement-block",
             "limit": 4,
             "settings": [
                 {
